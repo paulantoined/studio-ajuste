@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { calculateEstimate, euro } from '@/lib/pricing';
 import { useWizardStore } from '@/lib/store';
 
@@ -12,9 +11,6 @@ export function SummaryPanel() {
     <aside className="card sticky top-6 space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">Synthèse projet</h3>
-        <Link href="/reglages" className="text-xs text-ink/60 underline-offset-2 hover:underline">
-          Réglages studio
-        </Link>
       </div>
       <div className="space-y-1 text-sm text-ink/80">
         <p className="capitalize">Type : {state.furnitureType}</p>

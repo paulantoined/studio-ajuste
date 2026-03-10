@@ -1,7 +1,24 @@
 import Link from 'next/link';
+import { headers } from 'next/headers';
+import { notFound } from 'next/navigation';
 import { STUDIO_BUSINESS_CONFIG } from '@/lib/business-config';
 
+function enforceInternalAccess() {
+  if (process.env.NODE_ENV !== 'production') {
+    return;
+  }
+
+  const internalAccessKey = process.env.INTERNAL_SETTINGS_ACCESS_KEY;
+  const requestAccessKey = headers().get('x-studio-access-key');
+
+  if (!internalAccessKey || requestAccessKey !== internalAccessKey) {
+    notFound();
+  }
+}
+
 export default function ReglagesPage() {
+  enforceInternalAccess();
+
   return (
     <main className="mx-auto max-w-5xl px-4 py-8">
       <div className="card space-y-6">
@@ -12,7 +29,8 @@ export default function ReglagesPage() {
           </Link>
         </div>
         <p className="text-sm text-ink/70">
-          Les paramètres métier sont externalisés dans <code>lib/business-config.ts</code> pour préserver une expérience client fluide.
+          Les paramètres métier sont externalisés dans <code>lib/business-config.ts</code> pour préserver une expérience client
+          fluide.
         </p>
 
         <section className="grid gap-4 md:grid-cols-2">
