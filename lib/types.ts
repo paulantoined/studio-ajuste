@@ -32,6 +32,7 @@ export type PricingEstimate = {
   highRange: number;
   complexityLevel: 'simple' | 'intermediaire' | 'avance';
   drivers: string[];
+  indicativeDelay: string;
 };
 
 export type LeadQualification = {
@@ -41,6 +42,14 @@ export type LeadQualification = {
   hasInspirationAssets: boolean;
   needsInstallation: boolean;
   score: number;
+};
+
+export type CustomComplexityOptions = {
+  hiddenCompartments: boolean;
+  acousticPanel: boolean;
+  floatingDesign: boolean;
+  metalFrame: boolean;
+  cableManagementLevel: 0 | 1 | 2;
 };
 
 export type QuoteRequestPayload = {
@@ -56,6 +65,7 @@ export type QuoteRequestPayload = {
     drawers: number;
     backPanel: boolean;
     wallFixings: boolean;
+    complexity: CustomComplexityOptions;
   };
   material: MaterialOption;
   finish: FinishOption;
@@ -96,5 +106,6 @@ export type ConfiguratorState = {
     wallFixings: boolean;
     installation: boolean;
     delivery: boolean;
+    complexity: CustomComplexityOptions;
   };
 };

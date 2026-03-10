@@ -94,3 +94,10 @@ npm run dev -- -p 3001
 ```
 
 Puis ouvrir `http://localhost:3001`.
+
+
+## Accès produit
+- Configurateur client : `http://localhost:3000`
+- Réglages studio : `http://localhost:3000/reglages`
+
+Les paramètres métier sont centralisés dans `lib/business-config.ts`.

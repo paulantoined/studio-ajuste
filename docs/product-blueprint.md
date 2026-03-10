@@ -1,86 +1,47 @@
-# Studio Ajuste · Module de préqualification premium (V1)
+# Studio Ajuste · Module de préqualification premium (V3)
 
-## 1) Reformulation produit
-Un configurateur éditorial qui convertit un besoin flou en demande de devis qualifiée, via une expérience guidée, esthétique et techniquement crédible.
+## Vision
+Un site unique avec deux espaces :
+- **Expérience client** : configurateur premium guidé, visuel, conversion-oriented.
+- **Réglages studio** : paramètres métier externalisés (`lib/business-config.ts`) pour piloter coûts, marges, scoring et délais sans polluer l'UX client.
 
-## 2) Parcours utilisateur idéal
-1. Introduction premium et rassurante.
-2. Choix typologie meuble.
-3. Saisie dimensions.
-4. Composition structure/modularité.
-5. Matériaux et finitions.
-6. Options et contraintes.
-7. Estimation indicative + facteurs prix.
-8. Formulaire de devis intelligent.
-9. Confirmation + prochaine étape.
+## UX/UI direction
+- Style éditorial, neutre chaud, inspiré du langage Studio Ajuste.
+- Diagramme axonométrique dynamique (esthétique Notion) qui évolue en temps réel selon dimensions, trame et options.
+- Motion discret (slide/fade) pour fluidifier la progression.
+- Inspiration benchmark sur les meilleures pratiques de configurateurs de sur-mesure (ex: Mobibam), sans copie de marque.
 
-## 3) Variables métier
-- Typologie meuble
-- Dimensions (L/H/P)
-- Colonnes/lignes/modules
-- Asymétrie et modules custom
-- Portes/tiroirs/LED
-- Matériau + finition
-- Pose + livraison
-- Budget client
-- Localisation + délai
-- Maturité projet + assets
+## Modules
+1. Landing premium
+2. Wizard configurateur (9 étapes)
+3. Schéma visuel dynamique par étape
+4. Summary sticky avec prix + délai indicatif
+5. Moteur de pricing paramétrable
+6. Scoring lead
+7. Payload automation (n8n-ready)
+8. Page interne de réglages
 
-## 4) Pricing V1
-Formule modulaire :
-- Base par typologie
-- Ajustements volume + nombre de modules
-- Add-ons portes/tiroirs/LED
-- Coefficients matériau + finition
-- Majoration asymétrie + modules spéciaux
-- Frais pose/livraison
-- Minimum de facturation
-- Fourchette avec buffer d'incertitude
+## Complexification sur-mesure ajoutée
+- Compartiments invisibles
+- Panneau acoustique
+- Effet meuble suspendu
+- Cadre métal apparent
+- Niveau de gestion des câbles (0/1/2)
 
-## 5) Types TypeScript
-Voir `lib/types.ts` :
-- `FurnitureType`
-- `ConfigurationDimensions`
-- `ModuleLayout`
-- `MaterialOption`
-- `FinishOption`
-- `PricingEstimate`
-- `LeadQualification`
-- `QuoteRequestPayload`
-- `AutomationPayload`
+## Fichiers clés
+- `app/page.tsx` : parcours utilisateur + contrôles complexité
+- `components/visuals/stage-visual.tsx` : visuel axo dynamique
+- `lib/business-config.ts` : paramètres métier et addons de complexité
+- `lib/pricing.ts` : moteur de prix enrichi
+- `app/reglages/page.tsx` : vue interne studio
 
-## 6) Architecture écrans
-- `app/page.tsx` pilote le wizard (9 écrans logiques)
-- `components/step-header.tsx` pour progression
-- `components/summary-panel.tsx` sticky summary
 
-## 7) Wireframes logiques
-- Colonne principale = étape active
-- Colonne droite = synthèse + estimation live
-- Mobile = stack verticale
+## Landing motion premium
+- Hero éditorial animé (pulse subtil)
+- Cartes visuelles en entrée progressive
+- Marquee de bénéfices pour dynamiser la perception de valeur
 
-## 8) Design system initial
-- Fond chaud clair, contrastes doux
-- Cartes arrondies bord fin
-- Typographie sobre, hiérarchie nette
-- Accent discret brun naturel
-
-## 9) Architecture frontend
-- Next.js App Router
-- Zustand pour état global
-- React Hook Form + Zod pour formulaire lead
-- Fonctions pures de pricing/qualification
-
-## 10) Composants React
-- `StepHeader`
-- `SummaryPanel`
-- Sections par étape dans `Home`
-
-## 11) Moteur pricing exemple
-Voir `lib/pricing.ts`.
-
-## 12) Payload webhook n8n exemple
-Voir `lib/payload.ts` avec `buildAutomationPayload`.
-
-## 13) Base de code des écrans
-Voir `app/page.tsx` pour les 9 étapes.
+## Prévisualisation avancée
+- Onglet axonométrie dynamique avec textures collage selon matériau/finition.
+- Export PNG du visuel avec dimensions + estimation.
+- Onglet vue 3D premium (placeholder visuel), architecture prête pour intégration future Three.js/HDRI/PBR.

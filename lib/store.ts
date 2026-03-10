@@ -24,7 +24,14 @@ const initialState: ConfiguratorState = {
     backPanel: true,
     wallFixings: true,
     installation: true,
-    delivery: true
+    delivery: true,
+    complexity: {
+      hiddenCompartments: false,
+      acousticPanel: false,
+      floatingDesign: false,
+      metalFrame: false,
+      cableManagementLevel: 1
+    }
   }
 };
 
@@ -37,7 +44,7 @@ export const useWizardStore = create<WizardStore>((set) => ({
     set((s) => ({
       state: {
         ...s.state,
-        [key]: { ...s.state[key], ...partial }
+        [key]: { ...(s.state[key] as object), ...(partial as object) }
       }
     }))
 }));

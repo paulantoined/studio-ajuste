@@ -1,0 +1,15 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="50" y="40" width="540" height="340" rx="24" fill="#F8F5F0" stroke="#D4CEC5"/>
+  <rect x="90" y="80" width="460" height="260" rx="14" stroke="#8B6A4A" stroke-width="2"/>
+  <g stroke="#1E1D1B" stroke-opacity="0.35">
+    <line x1="182" y1="80" x2="182" y2="340"/>
+    <line x1="274" y1="80" x2="274" y2="340"/>
+    <line x1="366" y1="80" x2="366" y2="340"/>
+    <line x1="458" y1="80" x2="458" y2="340"/>
+    <line x1="90" y1="145" x2="550" y2="145"/>
+    <line x1="90" y1="210" x2="550" y2="210"/>
+    <line x1="90" y1="275" x2="550" y2="275"/>
+  </g>
+  <rect x="274" y="145" width="184" height="130" fill="#E9E2D8"/>
+  <text x="90" y="30" fill="#1E1D1B" font-family="Inter, sans-serif" font-size="14">Schéma modulaire · Bibliothèque sur mesure</text>
+</svg>
