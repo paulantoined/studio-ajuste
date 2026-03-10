@@ -34,3 +34,9 @@ Un site unique avec deux espaces :
 - `lib/business-config.ts` : paramètres métier et addons de complexité
 - `lib/pricing.ts` : moteur de prix enrichi
 - `app/reglages/page.tsx` : vue interne studio
+
+
+## Prévisualisation avancée
+- Onglet axonométrie dynamique avec textures collage selon matériau/finition.
+- Export PNG du visuel avec dimensions + estimation.
+- Onglet vue 3D premium (placeholder visuel), architecture prête pour intégration future Three.js/HDRI/PBR.

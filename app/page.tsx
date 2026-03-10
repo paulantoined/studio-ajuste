@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { StepHeader } from '@/components/step-header';
 import { SummaryPanel } from '@/components/summary-panel';
 import { StageVisual } from '@/components/visuals/stage-visual';
+import { SliderNumber } from '@/components/slider-number';
 import { buildAutomationPayload, LeadFormValues, leadFormSchema } from '@/lib/payload';
 import { calculateEstimate, euro } from '@/lib/pricing';
 import { useWizardStore } from '@/lib/store';
@@ -84,34 +85,22 @@ export default function Home() {
 
           {step === 2 && (
             <div className="grid gap-4 md:grid-cols-3">
-              {([
-                ['widthCm', 'Largeur (cm)'],
-                ['heightCm', 'Hauteur (cm)'],
-                ['depthCm', 'Profondeur (cm)']
-              ] as const).map(([key, label]) => (
-                <label key={key} className="label">
-                  {label}
-                  <input
-                    type="number"
-                    className="input"
-                    value={state.dimensions[key]}
-                    onChange={(e) => patchNested('dimensions', { [key]: Number(e.target.value) })}
-                  />
-                </label>
-              ))}
+              <SliderNumber label="Largeur (cm)" value={state.dimensions.widthCm} min={80} max={420} step={1} onChange={(value) => patchNested('dimensions', { widthCm: value })} />
+              <SliderNumber label="Hauteur (cm)" value={state.dimensions.heightCm} min={40} max={320} step={1} onChange={(value) => patchNested('dimensions', { heightCm: value })} />
+              <SliderNumber label="Profondeur (cm)" value={state.dimensions.depthCm} min={20} max={80} step={1} onChange={(value) => patchNested('dimensions', { depthCm: value })} />
             </div>
           )}
 
           {step === 3 && (
             <div className="space-y-5">
               <div className="grid gap-4 md:grid-cols-3">
-                <label className="label">Colonnes<input type="number" className="input" value={state.layout.columns} onChange={(e) => patchNested('layout', { columns: Number(e.target.value) })} /></label>
-                <label className="label">Lignes<input type="number" className="input" value={state.layout.rows} onChange={(e) => patchNested('layout', { rows: Number(e.target.value) })} /></label>
-                <label className="label">Modules larges spécifiques<input type="number" className="input" value={state.layout.customLargeModules} onChange={(e) => patchNested('layout', { customLargeModules: Number(e.target.value) })} /></label>
+                <SliderNumber label="Colonnes" value={state.layout.columns} min={1} max={8} onChange={(value) => patchNested('layout', { columns: value })} />
+                <SliderNumber label="Lignes" value={state.layout.rows} min={1} max={8} onChange={(value) => patchNested('layout', { rows: value })} />
+                <SliderNumber label="Modules larges spécifiques" value={state.layout.customLargeModules} min={0} max={6} onChange={(value) => patchNested('layout', { customLargeModules: value })} />
               </div>
               <div className="grid gap-4 md:grid-cols-2">
-                <label className="label">Cases ouvertes<input type="number" className="input" value={state.layout.openModules} onChange={(e) => patchNested('layout', { openModules: Number(e.target.value) })} /></label>
-                <label className="label">Cases fermées<input type="number" className="input" value={state.layout.closedModules} onChange={(e) => patchNested('layout', { closedModules: Number(e.target.value) })} /></label>
+                <SliderNumber label="Cases ouvertes" value={state.layout.openModules} min={0} max={24} onChange={(value) => patchNested('layout', { openModules: value })} />
+                <SliderNumber label="Cases fermées" value={state.layout.closedModules} min={0} max={24} onChange={(value) => patchNested('layout', { closedModules: value })} />
               </div>
               <label className="inline-flex items-center gap-2 text-sm">
                 <input type="checkbox" checked={state.layout.asymmetry} onChange={(e) => patchNested('layout', { asymmetry: e.target.checked })} />
@@ -143,8 +132,8 @@ export default function Home() {
           {step === 5 && (
             <div className="space-y-5">
               <div className="grid gap-4 md:grid-cols-2">
-                <label className="label">Portes<input type="number" className="input" value={state.options.doors} onChange={(e) => patchNested('options', { doors: Number(e.target.value) })} /></label>
-                <label className="label">Tiroirs<input type="number" className="input" value={state.options.drawers} onChange={(e) => patchNested('options', { drawers: Number(e.target.value) })} /></label>
+                <SliderNumber label="Portes" value={state.options.doors} min={0} max={12} onChange={(value) => patchNested('options', { doors: value })} />
+                <SliderNumber label="Tiroirs" value={state.options.drawers} min={0} max={12} onChange={(value) => patchNested('options', { drawers: value })} />
               </div>
               <div className="grid gap-3 md:grid-cols-2">
                 {([
