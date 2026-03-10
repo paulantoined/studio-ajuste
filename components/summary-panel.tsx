@@ -27,6 +27,7 @@ export function SummaryPanel() {
         <p>
           Matériau : {state.material} · Finition : {state.finish}
         </p>
+        <p>Complexité câbles : niveau {state.options.complexity.cableManagementLevel}</p>
       </div>
       <div className="rounded-xl bg-warm p-4">
         <p className="text-sm text-ink/70">Estimation indicative</p>

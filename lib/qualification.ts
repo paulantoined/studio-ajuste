@@ -10,7 +10,7 @@ export function scoreLead(input: ConfiguratorState, budget: number, location: st
   if (budgetAligned) score += leadScoring.points.budgetAligned;
   if (localProject) score += leadScoring.points.localProject;
   if (input.options.installation) score += leadScoring.points.needsInstallation;
-  if (input.layout.asymmetry || input.layout.customLargeModules > 0) score += leadScoring.points.customComplexity;
+  if (input.layout.asymmetry || input.layout.customLargeModules > 0 || input.options.complexity.cableManagementLevel > 0 || input.options.complexity.hiddenCompartments) score += leadScoring.points.customComplexity;
   if (hasAssets) score += leadScoring.points.inspirationAssets;
   if (input.furnitureType === 'bibliotheque' || input.furnitureType === 'meuble-tv') score += leadScoring.points.coreFurnitureType;
 

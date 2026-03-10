@@ -65,7 +65,7 @@ export default function Home() {
             </div>
           )}
 
-          {step >= 1 && step <= 6 && <StageVisual step={step} furnitureType={state.furnitureType} />}
+          {step >= 1 && step <= 6 && <StageVisual step={step} state={state} />}
 
           {step === 1 && (
             <div className="grid gap-4 md:grid-cols-2">
@@ -109,6 +109,10 @@ export default function Home() {
                 <label className="label">Lignes<input type="number" className="input" value={state.layout.rows} onChange={(e) => patchNested('layout', { rows: Number(e.target.value) })} /></label>
                 <label className="label">Modules larges spécifiques<input type="number" className="input" value={state.layout.customLargeModules} onChange={(e) => patchNested('layout', { customLargeModules: Number(e.target.value) })} /></label>
               </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                <label className="label">Cases ouvertes<input type="number" className="input" value={state.layout.openModules} onChange={(e) => patchNested('layout', { openModules: Number(e.target.value) })} /></label>
+                <label className="label">Cases fermées<input type="number" className="input" value={state.layout.closedModules} onChange={(e) => patchNested('layout', { closedModules: Number(e.target.value) })} /></label>
+              </div>
               <label className="inline-flex items-center gap-2 text-sm">
                 <input type="checkbox" checked={state.layout.asymmetry} onChange={(e) => patchNested('layout', { asymmetry: e.target.checked })} />
                 Composition asymétrique
@@ -137,21 +141,68 @@ export default function Home() {
           )}
 
           {step === 5 && (
-            <div className="grid gap-4 md:grid-cols-2">
-              <label className="label">Portes<input type="number" className="input" value={state.options.doors} onChange={(e) => patchNested('options', { doors: Number(e.target.value) })} /></label>
-              <label className="label">Tiroirs<input type="number" className="input" value={state.options.drawers} onChange={(e) => patchNested('options', { drawers: Number(e.target.value) })} /></label>
-              {([
-                ['led', 'Éclairage LED'],
-                ['backPanel', 'Panneau de fond'],
-                ['wallFixings', 'Fixations murales'],
-                ['installation', 'Pose incluse'],
-                ['delivery', 'Livraison']
-              ] as const).map(([key, label]) => (
-                <label key={key} className="inline-flex items-center gap-2 text-sm">
-                  <input type="checkbox" checked={state.options[key]} onChange={(e) => patchNested('options', { [key]: e.target.checked })} />
-                  {label}
+            <div className="space-y-5">
+              <div className="grid gap-4 md:grid-cols-2">
+                <label className="label">Portes<input type="number" className="input" value={state.options.doors} onChange={(e) => patchNested('options', { doors: Number(e.target.value) })} /></label>
+                <label className="label">Tiroirs<input type="number" className="input" value={state.options.drawers} onChange={(e) => patchNested('options', { drawers: Number(e.target.value) })} /></label>
+              </div>
+              <div className="grid gap-3 md:grid-cols-2">
+                {([
+                  ['led', 'Éclairage LED'],
+                  ['backPanel', 'Panneau de fond'],
+                  ['wallFixings', 'Fixations murales'],
+                  ['installation', 'Pose incluse'],
+                  ['delivery', 'Livraison']
+                ] as const).map(([key, label]) => (
+                  <label key={key} className="inline-flex items-center gap-2 text-sm">
+                    <input type="checkbox" checked={state.options[key]} onChange={(e) => patchNested('options', { [key]: e.target.checked })} />
+                    {label}
+                  </label>
+                ))}
+              </div>
+              <div className="rounded-xl border border-stone/60 bg-[#fcfaf7] p-4">
+                <p className="mb-2 text-sm font-medium">Complexification sur-mesure</p>
+                <div className="grid gap-2 md:grid-cols-2 text-sm">
+                  {([
+                    ['hiddenCompartments', 'Compartiments invisibles'],
+                    ['acousticPanel', 'Panneau acoustique'],
+                    ['floatingDesign', 'Effet meuble suspendu'],
+                    ['metalFrame', 'Cadre métal apparent']
+                  ] as const).map(([key, label]) => (
+                    <label key={key} className="inline-flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={state.options.complexity[key]}
+                        onChange={(e) =>
+                          patchNested('options', {
+                            complexity: { ...state.options.complexity, [key]: e.target.checked }
+                          })
+                        }
+                      />
+                      {label}
+                    </label>
+                  ))}
+                </div>
+                <label className="label mt-3 block">
+                  Gestion câbles
+                  <select
+                    className="input"
+                    value={state.options.complexity.cableManagementLevel}
+                    onChange={(e) =>
+                      patchNested('options', {
+                        complexity: {
+                          ...state.options.complexity,
+                          cableManagementLevel: Number(e.target.value) as 0 | 1 | 2
+                        }
+                      })
+                    }
+                  >
+                    <option value={0}>Aucune</option>
+                    <option value={1}>Standard</option>
+                    <option value={2}>Avancée (multizone)</option>
+                  </select>
                 </label>
-              ))}
+              </div>
             </div>
           )}
 

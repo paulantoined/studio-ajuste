@@ -38,7 +38,8 @@ export function buildAutomationPayload(state: ConfiguratorState, lead: LeadFormV
         doors: state.options.doors,
         drawers: state.options.drawers,
         backPanel: state.options.backPanel,
-        wallFixings: state.options.wallFixings
+        wallFixings: state.options.wallFixings,
+        complexity: state.options.complexity
       },
       material: state.material,
       finish: state.finish,

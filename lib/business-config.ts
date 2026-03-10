@@ -11,6 +11,13 @@ export type StudioBusinessConfig = {
   ledAddon: number;
   asymmetryCoefficient: number;
   customModuleSurcharge: number;
+  complexityAddons: {
+    hiddenCompartments: number;
+    acousticPanel: number;
+    floatingDesign: number;
+    metalFrame: number;
+    cableManagementByLevel: Record<0 | 1 | 2, number>;
+  };
   installationFee: number;
   deliveryFee: number;
   minimumCharge: number;
@@ -60,6 +67,17 @@ export const STUDIO_BUSINESS_CONFIG: StudioBusinessConfig = {
   ledAddon: 320,
   asymmetryCoefficient: 1.1,
   customModuleSurcharge: 140,
+  complexityAddons: {
+    hiddenCompartments: 170,
+    acousticPanel: 220,
+    floatingDesign: 260,
+    metalFrame: 310,
+    cableManagementByLevel: {
+      0: 0,
+      1: 110,
+      2: 220
+    }
+  },
   installationFee: 450,
   deliveryFee: 180,
   minimumCharge: 1600,

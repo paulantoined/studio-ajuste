@@ -16,6 +16,13 @@ export function calculateEstimate(input: ConfiguratorState): PricingEstimate {
   if (input.layout.asymmetry) price *= config.asymmetryCoefficient;
   if (input.layout.customLargeModules > 0) price += input.layout.customLargeModules * config.customModuleSurcharge;
 
+  const complexity = input.options.complexity;
+  if (complexity.hiddenCompartments) price += config.complexityAddons.hiddenCompartments;
+  if (complexity.acousticPanel) price += config.complexityAddons.acousticPanel;
+  if (complexity.floatingDesign) price += config.complexityAddons.floatingDesign;
+  if (complexity.metalFrame) price += config.complexityAddons.metalFrame;
+  price += config.complexityAddons.cableManagementByLevel[complexity.cableManagementLevel];
+
   price *= config.materialCoefficient[input.material];
   price *= config.finishCoefficient[input.finish];
 
@@ -34,10 +41,24 @@ export function calculateEstimate(input: ConfiguratorState): PricingEstimate {
   formatDriver(input.material !== 'melamine', 'Matériau premium', drivers);
   formatDriver(input.finish !== 'standard-mat', 'Finition avancée', drivers);
   formatDriver(input.layout.asymmetry, 'Composition asymétrique', drivers);
+  formatDriver(complexity.hiddenCompartments, 'Compartiments invisibles', drivers);
+  formatDriver(complexity.floatingDesign, 'Effet suspendu', drivers);
+  formatDriver(complexity.cableManagementLevel === 2, 'Gestion câbles avancée', drivers);
 
   let complexityLevel: PricingEstimate['complexityLevel'] = 'simple';
-  if (modules >= 10 || input.layout.asymmetry || input.options.drawers >= 3) complexityLevel = 'intermediaire';
-  if (modules >= 14 || input.layout.customLargeModules >= 2 || (input.options.led && input.options.drawers >= 3)) complexityLevel = 'avance';
+  if (modules >= 10 || input.layout.asymmetry || input.options.drawers >= 3 || complexity.cableManagementLevel >= 1) {
+    complexityLevel = 'intermediaire';
+  }
+  if (
+    modules >= 14 ||
+    input.layout.customLargeModules >= 2 ||
+    (input.options.led && input.options.drawers >= 3) ||
+    complexity.hiddenCompartments ||
+    complexity.metalFrame ||
+    complexity.cableManagementLevel === 2
+  ) {
+    complexityLevel = 'avance';
+  }
 
   return {
     estimatedBase,
