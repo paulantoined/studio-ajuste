@@ -101,3 +101,17 @@ Puis ouvrir `http://localhost:3001`.
 - Réglages studio : `http://localhost:3000/reglages`
 
 Les paramètres métier sont centralisés dans `lib/business-config.ts`.
+
+## Assistant Telegram
+
+Un chatbot Telegram (propulsé par Claude) permet d'interroger tes projets de
+meubles, l'état des chantiers, la doc et la config métier, avec accès en lecture
+à tous les fichiers du projet.
+
+```bash
+cp .env.example .env   # renseigne TELEGRAM_BOT_TOKEN et ANTHROPIC_API_KEY
+npm run bot
+```
+
+Voir [`bot/README.md`](bot/README.md) pour la configuration complète, et
+[`projets/`](projets/) pour déposer tes notes de chantier.

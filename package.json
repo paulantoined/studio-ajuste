@@ -7,14 +7,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "bot": "tsx bot/index.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.109.1",
     "next": "14.2.5",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-hook-form": "7.53.0",
-    "zod": "3.23.8",
+    "zod": "^3.25.0",
     "zustand": "4.5.4"
   },
   "devDependencies": {
@@ -24,6 +26,7 @@
     "autoprefixer": "10.4.19",
     "postcss": "8.4.39",
     "tailwindcss": "3.4.6",
+    "tsx": "^4.19.0",
     "typescript": "5.5.3"
   }
 }
